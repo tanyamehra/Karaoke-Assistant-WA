@@ -1,0 +1,14 @@
+.browse {
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    margin: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.browse p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+

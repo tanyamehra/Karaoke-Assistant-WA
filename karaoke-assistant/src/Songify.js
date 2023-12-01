@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Songify.css'; // Import the CSS file for styling
+import './Songify.css'; 
 
 
 const Songify = () => {
@@ -11,10 +11,10 @@ const Songify = () => {
 
 
   useEffect(() => {
-    // Make a GET request to your backend API
+    // Make a GET request to backend API
     axios.get('http://localhost:3001/api/songs', {
       params: {
-        vocal_name: 'Tenor', 
+        vocal_name: receivedProps.vocalRangeWithGender === "Unknown" ? receivedProps.vocalRange : receivedProps.vocalRangeWithGender, 
       },
     })
     .then((response) => {
@@ -25,11 +25,11 @@ const Songify = () => {
     });
   }, []);
 
-  // You can now use pitch and note data in your component
+  // Can now use pitch and note data in component
   return (
     <div>
       <div className="songify-container">
-      <h1 className=''>Find your recommended songs</h1>
+      <h1 className="heading">Find your recommended songs</h1>
 
       {songResults.length === 0 ? (
         <p>No matching songs found.</p>

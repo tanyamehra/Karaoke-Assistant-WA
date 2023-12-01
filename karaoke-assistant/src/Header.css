@@ -1,5 +1,5 @@
 .header {
-    background-color: #333;
+    background-color: #fd5c70;
     color: #fff;
     display: flex;
     justify-content: space-between;
@@ -9,11 +9,27 @@
   .logo {
     font-size: 24px;
     text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
     color: #fff;
   }
   
+  .browse-link {
+    text-decoration: none;
+    color: #fff;
+    margin-left: 450px;
+    margin-right: 20px;
+    font-size: large;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
   .about-link {
     text-decoration: none;
     color: #fff;
+    margin-right: 20px;
+    font-size: large;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
   }
   

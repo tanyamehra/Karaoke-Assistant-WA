@@ -8,6 +8,9 @@ const Header = () => {
       <Link to="/" className="logo">
         Karoake Assistant
       </Link>
+      <Link to="/browse" className="browse-link">
+        Browse Songs
+      </Link>
       <Link to="/about" className="about-link">
         About
       </Link>

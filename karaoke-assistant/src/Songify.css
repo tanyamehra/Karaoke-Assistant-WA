@@ -1,4 +1,4 @@
-/* Add styling for the Songify page */
+/* Styling for the Songify page */
 .songify-container {
     margin: 20px auto;
     padding: 20px;
@@ -7,15 +7,16 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  h1 {
+  .heading {
     font-size: 32px;
     margin-bottom: 20px;
-    color: #333;
+    color: #27276d;
+    text-transform: uppercase;
   }
   
   p {
     font-size: 20px;
-    color: #555;
+    color: #27276d;
   }
   
   .song-table {
@@ -27,14 +28,14 @@
   
   .song-table th,
   .song-table td {
-    border: 1px solid #ddd;
+    border: 1px solid #27276d;
     padding: 12px;
     text-align: left;
   }
   
   .song-table th {
-    background-color: #f2f2f2;
-    color: #333;
+    background-color: #fd5c70;
+    color: white;
     font-weight: bold;
   }
   

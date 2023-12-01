@@ -1,22 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import microphoneIcon from './static/microphone.png';
+import maleIcon from './static/male.png'; 
+import femaleIcon from './static/female.png'; 
 import './Home.css';
 import {analyzeAudio} from './audioUtils';
 import { useNavigate } from 'react-router-dom';
+import startPitchDetectionAndReturnResults from './Pitch';
+
 
 
 const Home = () => {
-  const RECORD_TIME = 3 // set to 3 seconds by default. More time will require processing time
+  const RECORD_TIME = 3 // set to 5 seconds by default. More time will require processing time
+  const CLOCK_TIME = RECORD_TIME + 2  // additional time for processing
   const [isRecording, setIsRecording] = useState(false);
   const [micClicked, setMicClicked] = useState(false);
-  const [timer, setTimer] = useState(RECORD_TIME); // Initialize the timer to 5 seconds
-  const [audioContext, setAudioContext] = useState(null);
-  const [mediaRecorder, setMediaRecorder] = useState(null);
+  const [timer, setTimer] = useState(CLOCK_TIME); // Initialize the timer to 5 seconds
   const [isLoading, setIsLoading] = useState(false); // State to manage loader visibility
   const [isVeryLow, setIsVeryLow] = useState(false); // State to manage loader visibility
-  let audioChunks = [];
+  const [selectedGender, setSelectedGender] = useState('female'); // State for selected gender
+  const [results, setResults] = useState(null); // Initialize results as null
   const navigate = useNavigate();
+  
 
+  const startPitchDetection = () => {
+    processPitchDetection(RECORD_TIME)
+  };
+
+  const handleGenderChange = (event) => {
+    setSelectedGender(event.target.value);
+  };
 
   useEffect(() => {
     let countdownInterval;
@@ -36,7 +48,7 @@ const Home = () => {
   }, [micClicked, timer, isRecording]);
 
   const handleMicClick = () => {
-    if (!micClicked && timer === RECORD_TIME && !isRecording) {
+    if (!micClicked && timer === CLOCK_TIME && !isRecording) {
       // Start the countdown timer when the microphone is clicked for the first time
       setMicClicked(true);
       setIsVeryLow(false)
@@ -44,66 +56,48 @@ const Home = () => {
     }
   };
 
+  // Recording start point
   const startRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const newAudioContext = new AudioContext();
-      setAudioContext(newAudioContext);
-
-      const mediaRecorder = new MediaRecorder(stream);
-      setMediaRecorder(mediaRecorder);
-      
-      mediaRecorder.ondataavailable = (event) => {
-        if (event.data.size > 0) {
-          audioChunks.push(event.data)
-        }
-      };
-
-      mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-        const audioUrl = URL.createObjectURL(audioBlob);
-
-        // Play the recorded audio (you can remove this if not needed)
-        const audioElement = new Audio(audioUrl);
-        audioElement.play();
-
-        // Analyze audio here (call your analyzeAudio function)
-        analyzer(audioBlob);
-      };
-
-      mediaRecorder.start();
-      setIsRecording(true); // Ideally set start recording here
-    } catch (error) {
-      console.error('Error accessing microphone:', error);
-    }
+    startPitchDetection();
+    setIsRecording(true)
   };
 
+  // Recording stop point
   const stopRecording = () => {
-    if (mediaRecorder && isRecording) {
-      mediaRecorder.stop();
-      mediaRecorder.stream.getTracks().forEach(track => track.stop()); // Stop the microphone stream
       setIsRecording(false);
-      audioChunks = [];
-      if (audioContext) {
-        setAudioContext(null);
-      }
-      audioContext.close();
-      setTimer(RECORD_TIME)
+      setTimer(CLOCK_TIME)
       setMicClicked(false)
-    }
+      analyzer();
   };
 
-  const analyzer = async (audioBlob) => {
-    // Implement your audio analysis logic here
-    setIsLoading(true);    
+  // Record and process the voice for the said duration
+  async function processPitchDetection(RECORD_TIME) {
+    try {
+      await startPitchDetectionAndReturnResults(RECORD_TIME)
+          .then((detectionResults) => {
+            // Update the state with the results
+            setResults(detectionResults);
+          }); 
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+  // Analyse the recorded voice.
+  const analyzer = async () => {
     try {
       // Analyze the audio and store the results in state
-      const result = await analyzeAudio(audioBlob);
+      const result = await analyzeAudio(results, selectedGender);
+      console.log(result)
+      const state = {
+        ...result,
+        "gender": selectedGender
+      }
       if(result.pitch == null){
         setIsVeryLow(true)
       }else{
         // Make call to the results page
-        navigate('/songify', { state: result })
+        navigate('/songify', { state: state })
       }
     } catch (error) {
       console.error('Error analyzing audio:', error);
@@ -132,6 +126,43 @@ const Home = () => {
 
   return (
     <div className="home">
+
+<div className="gender-selection-card">
+      <div className="gender-icon">
+        <img src={maleIcon} alt="Male" />
+      </div>
+      <div className="gender-label">
+        <label>
+          Male
+          <br />
+          <input
+            type="radio"
+            name="gender"
+            value="male"
+            checked={selectedGender === 'male'}
+            onChange={handleGenderChange}
+          />
+        </label>
+      </div>
+
+      <div className="gender-icon">
+        <img src={femaleIcon} alt="Female" />
+      </div>
+      <div className="gender-label">
+        <label>
+          Female
+          <br />
+          <input
+            type="radio"
+            name="gender"
+            value="female"
+            checked={selectedGender === 'female'}
+            onChange={handleGenderChange}
+          />
+        </label>
+      </div>
+    </div>
+
       <a
         href='#'
         className={`microphone ${micClicked ? 'disabled' : ''}`}

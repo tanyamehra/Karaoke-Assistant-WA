@@ -9,9 +9,9 @@ const port = 3001; // Choose a port for your server
 
 // Create a MySQL database connection
 const db = mysql.createConnection({
-  host: 'localhost', // Replace with your database host
+  host: '127.0.0.1', // Replace with your database host
   user: 'root', // Replace with your MySQL username
-  password: 'root', // Replace with your MySQL password
+  password: 'Kimdy0201!', // Replace with your MySQL password
   database: 'karaoke_assistant', // Replace with your MySQL database name
 });
 

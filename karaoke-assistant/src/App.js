@@ -14,7 +14,7 @@ function App() {
       <Header />
       <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/Browse" element={<Browse />} />
+          <Route exact path="/browse-songs" element={<Browse />} />
           <Route exact path="/about" element={<About />} />
           <Route exact path="/songify" Component={Songify} />
       </Routes>

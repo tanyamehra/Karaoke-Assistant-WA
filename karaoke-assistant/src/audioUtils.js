@@ -35,16 +35,16 @@ export async function analyzeAudio(audioData, gender) {
 const vocalRanges = {
     male: [
       {
+        type: 'Tenor',
+        range: { min: 123.47, max: 329.00 },
+      },
+      {
         type: 'Bass',
         range: { min: 82.41, max: 261.63 },
       },
       {
         type: 'Baritone',
         range: { min: 98.00, max: 329.63 },
-      },
-      {
-        type: 'Tenor',
-        range: { min: 123.47, max: 329.00 },
       },
       // {
       //   type: 'Alto',
@@ -61,7 +61,7 @@ const vocalRanges = {
       {
         type: 'Not in range',
         range: { min: 0, max: 0 },
-      },
+      }
     ],
     female: [
       {

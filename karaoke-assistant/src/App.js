@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './Header';
-import Home from './Home'
-import About from './About';
-import Browse from './Browse';
-import Songify from './Songify';
-import Footer from './Footer';
+import Header from './components/Header';
+import Home from './pages/Home'
+import About from './pages/About';
+import Browse from './pages/Browse';
+import Songify from './components/Songify';
+import Footer from './components/Footer';
 
 function App() {
   

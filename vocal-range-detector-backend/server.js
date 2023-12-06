@@ -28,24 +28,46 @@ db.connect((err) => {
 app.get('/api/songs', (req, res) => {
   // Extract the pitch value from the request query parameters
   const vocal_name = req.query.vocal_name;
+  // const sql = "SELECT s.title, v.name as vocal_range, a.name as artist_name, l.name as language, s.release_year FROM songs s INNER JOIN vocal_ranges v ON v.vocal_range_id = s.vocal_range_id INNER JOIN artists a ON a.artist_id = s.artist_id INNER JOIN languages l on l.language_id = s.language_id WHERE v.name LIKE ?";
+
+  // db.query(sql, vocal_name, (err, data)=> {
+  //   if(err) return res.json(err);
+  //   return res, json(data);
+  // })
 
   // Execute a sample database query (replace with your actual query)
+  // db.query(`
+  //       SELECT s.title, v.name as vocal_range, a.name as artist_name, l.name as language, s.release_year 
+  //       FROM songs s
+  //       INNER JOIN vocal_ranges v ON v.vocal_range_id = s.vocal_range_id
+  //       INNER JOIN artists a ON a.artist_id = s.artist_id
+  //       INNER JOIN languages l on l.language_id = s.language_id
+  //       WHERE v.name 
+  //       LIKE ?`, [`${vocal_name}`], (err, results) => {
+  //   if (err) {
+  //     console.error('Error querying database:', err);
+  //     res.status(500).json({ error: 'An error occurred' });
+  //   } else {
+  //     res.json(results); // Send the matching results as JSON response
+  //     return res;
+  //   } console.log('result: ', results);
+  // });  
   db.query(`
-
-        SELECT s.title, v.name as vocal_range, a.name as artist_name, l.name as language, s.release_year 
+        SELECT s.title, v.name as vocal_range, a.name as artist_name, l.name as language, s.release_year, s.embed_link
         FROM songs s
         INNER JOIN vocal_ranges v ON v.vocal_range_id = s.vocal_range_id
         INNER JOIN artists a ON a.artist_id = s.artist_id
         INNER JOIN languages l on l.language_id = s.language_id
-        WHERE v.name 
-        LIKE ?
-    `, [`${vocal_name}`], (err, results) => {
+        WHERE v.name = 'tenor'
+        `, (err, results) => {
     if (err) {
       console.error('Error querying database:', err);
       res.status(500).json({ error: 'An error occurred' });
     } else {
+      console.log('range: ', vocal_name);
       res.json(results); // Send the matching results as JSON response
-    }
+      return res;
+    } 
   });  
 });
 

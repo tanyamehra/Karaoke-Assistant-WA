@@ -1,0 +1,101 @@
+html , page {
+    max-height: 100vh;
+    max-width: 100%;
+    background-color: #f0f0f0; /* Background color for fallback */
+}
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    max-height: 100vh;
+    background-size: cover;
+  }
+  
+  .microphone {
+    position: relative;
+    width: 200px;
+    height: 200px;
+  }
+
+  .text-status {
+    font-size: 30px; /* Increased font size */
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: color 0.3s; /* Smooth color transition */
+    font-family: 'Roboto Condensed', sans-serif; /* Apply the custom font */
+    letter-spacing: 2px; /* Increase letter spacing */
+  }
+  
+  .microphone img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .timer {
+    font-size: 48px; /* Increased font size */
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: color 0.3s; /* Smooth color transition */
+    color: #fff; /* Font color */
+    font-family: 'Roboto Condensed', sans-serif; /* Apply the custom font */
+    color: #27276d;
+    font-weight: bolder;
+    letter-spacing: 2px; /* Increase letter spacing */
+  }
+
+  /* Loader.css */
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100%; */
+  }
+  
+  .loader {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #eb0000;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+
+  /* GenderSelection.css */
+
+.gender-selection-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  margin: 40px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  color: #eb0000;
+}
+
+.gender-icon img {
+  width: 50px; /* Adjust the icon size as needed */
+  height: 50px; /* Adjust the icon size as needed */
+}
+
+.gender-label label {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');

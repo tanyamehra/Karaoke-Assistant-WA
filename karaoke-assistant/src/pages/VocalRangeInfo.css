@@ -1,0 +1,28 @@
+.vocal-info {
+    padding: 50px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    margin: 50px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .vocal-info h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .vocal-info h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .vocal-info p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  .vocal-info strong {
+    font-weight: bold;
+    color: #333;
+  }

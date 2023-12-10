@@ -17,7 +17,16 @@
   .browse-link {
     text-decoration: none;
     color: #fff;
-    margin-left: 600px;
+    margin-left: 400px;
+    margin-right: 20px;
+    font-size: large;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .vocal-info-link {
+    text-decoration: none;
+    color: #fff;
     margin-right: 20px;
     font-size: large;
     letter-spacing: 0.2em;

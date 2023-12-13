@@ -5,9 +5,9 @@ import axios from 'axios';
 import './Songify.css'; 
 
 
-const Songify = () => {
+const Songify = ( vocal_r ) => {
   const location = useLocation();
-  const receivedProps = location.state;
+  const receivedProps = location.vocal_r;
   const [songResults, setSongResults] = useState([]);
   // const [playerOpen, setPlayerOpen] = useState("")
   // const embedLink = songResults.embed_link;        Sample implementation of additional feature (player)
@@ -17,7 +17,8 @@ const Songify = () => {
     // Make a GET request to backend API
     axios.get('http://localhost:3001/api/songs', {
       params: {
-        vocal_name: receivedProps.vocalRangeWithGender === "Unknown" ? receivedProps.vocalRange : receivedProps.vocalRangeWithGender, 
+        vocal_name: receivedProps
+        // .vocalRangeWithGender === "Unknown" ? receivedProps.vocalRange : receivedProps.vocalRangeWithGender, 
       },
     })
     .then((response) => {

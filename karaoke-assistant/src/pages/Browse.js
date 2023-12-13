@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 const Browse = () => {
   const [selectedVocalRange, setSelectedVocalRange] = useState("");
   const navigate = useNavigate();
-  const state = [selectedVocalRange];
+  const vocal_r = selectedVocalRange;
   
-  navigate('/songify', { state: state })
+  navigate('/songify', { vocal_r })
   console.log(selectedVocalRange)
 
   return (

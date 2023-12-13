@@ -97,7 +97,7 @@ const Home = () => {
         setIsVeryLow(true)
       }else{
         // Make call to the results page
-        navigate('/songify', { state: state })
+        navigate('/songify', { selectedGender })
       }
     } catch (error) {
       console.error('Error analyzing audio:', error);
